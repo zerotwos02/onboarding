@@ -1,18 +1,30 @@
-/* eslint-disable @angular-eslint/component-selector */
 import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
 @Component({
-  selector: 'nav-button',
   standalone: true,
+  imports: [RouterModule],
+  selector: 'nav-button',
   template: `
-    <a [href]="href">
+    <a [routerLink]="[href]" [fragment]="fragment" class="nav-button">
       <ng-content></ng-content>
     </a>
   `,
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-  host: {
-    class: 'block w-fit border border-red-500 rounded-md p-4 m-2',
-  },
+  styles: [`
+    .nav-button {
+      display: inline-block;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    .nav-button:hover {
+      background-color: #0056b3;
+    }
+  `]
 })
 export class NavButtonComponent {
-  @Input() href = '';
+  @Input() href: string = '';  // Provide a default value
+  @Input() fragment: string = '';  // Provide a default value
 }
